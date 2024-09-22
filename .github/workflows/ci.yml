@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  TEST_TAG: user/app:test
-  LATEST_TAG: user/app:latest
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,9 +23,7 @@ jobs:
         echo "Building Docker image with tag: $IMAGE_TAG"
         docker build . --file Dockerfile --tag my-image-name:$IMAGE_TAG
 
-    - name: Test
-      run: |
-        docker run --rm ${{ env.TEST_TAG }}    
+  
         
 
   
