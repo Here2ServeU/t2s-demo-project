@@ -31,15 +31,10 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Load Docker image tag
-      run: echo "Using Docker image tag: ${{ env.IMAGE_TAG }}"
+      run: |
+        echo "IMAGE_TAG=${{ env.IMAGE_TAG }}"  # Debug to verify the tag is loaded correctly
 
     - name: Run tests on Docker image
       run: |
-        echo "Running tests on Docker image with tag: $IMAGE_TAG"
-        docker run --rm my-image-name:$IMAGE_TAG pytest tests/
-      
-      env:
-        IMAGE_TAG: ${{ env.IMAGE_TAG }}
-        
-
-  
+        echo "Running tests on Docker image with tag: ${{ env.IMAGE_TAG }}"
+        docker run --rm my-image-name:${{ env.IMAGE_TAG }} pytest tests/
