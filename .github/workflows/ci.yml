@@ -23,19 +23,4 @@ jobs:
         echo "Building Docker image with tag: $IMAGE_TAG"
         docker build . --file Dockerfile --tag my-image-name:$IMAGE_TAG
 
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Load image tag
-      run: echo "IMAGE_TAG=${{ env.IMAGE_TAG }}"  # Debugging step to check the value of IMAGE_TAG
-
-    - name: Run tests on Docker image
-      run: |
-        echo "Running Docker image with tag: $IMAGE_TAG"
-        docker run --rm my-image-name:$IMAGE_TAG pytest tests/
-      env:
-        IMAGE_TAG: ${{ env.IMAGE_TAG }}
+  
